@@ -27,7 +27,6 @@ class _SearchScreenState extends State<SearchScreen> {
   final GlobalKey _filterPanelKey = GlobalKey();
   bool _showFilterPanel = false;
 
-
   @override
   void dispose() {
     _searchController.dispose();
@@ -37,14 +36,14 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _performSearch() {
     context.read<JobProvider>().searchJobs(
-          query: _searchController.text.trim().isEmpty ? null : _searchController.text.trim(),
-          location: _locationController.text.trim().isEmpty ? null : _locationController.text.trim(),
-          jobType: _selectedJobType,
-          experienceLevel: _selectedExperienceLevel,
-          workLocation: _selectedWorkLocation,
-          minSalary: _minSalary,
-          maxSalary: _maxSalary,
-        );
+      query: _searchController.text.trim().isEmpty ? null : _searchController.text.trim(),
+      location: _locationController.text.trim().isEmpty ? null : _locationController.text.trim(),
+      jobType: _selectedJobType,
+      experienceLevel: _selectedExperienceLevel,
+      workLocation: _selectedWorkLocation,
+      minSalary: _minSalary,
+      maxSalary: _maxSalary,
+    );
   }
 
   void _clearFilters() {
@@ -150,9 +149,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
                   width: _showFilterPanel ? 300 : 0, // Animate width
-                  child: Material( // Add Material for elevation and theming
+                  child: Material(
+                    // Add Material for elevation and theming
                     elevation: 4,
-                    child: FilterBottomSheet( // Re-use FilterBottomSheet for consistency
+                    child: FilterBottomSheet(
+                      // Re-use FilterBottomSheet for consistency
                       key: _filterPanelKey,
                       selectedJobType: _selectedJobType,
                       selectedExperienceLevel: _selectedExperienceLevel,
@@ -160,8 +161,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       minSalary: _minSalary,
                       maxSalary: _maxSalary,
                       onApplyFilters: _applyFiltersFromPanel,
+                      /* 
+                      TODO 
                       isDialog: false, // Indicate it's not a modal dialog
                       onClose: () => setState(() => _showFilterPanel = false),
+                    */
                     ),
                   ),
                 ),
@@ -311,14 +315,18 @@ class _SearchScreenState extends State<SearchScreen> {
               if (!isLargeScreen) const SizedBox(width: 12), // Spacing for small screens
               Container(
                 decoration: BoxDecoration(
-                  gradient: _hasActiveFilters && !isLargeScreen // Apply gradient only if filters active and not large screen (desktop button is different)
+                  gradient:
+                      _hasActiveFilters &&
+                          !isLargeScreen // Apply gradient only if filters active and not large screen (desktop button is different)
                       ? const LinearGradient(
                           colors: [Color(0xFF2563EB), Color(0xFF3B82F6)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         )
                       : null,
-                  color: _hasActiveFilters && !isLargeScreen ? null : Theme.of(context).colorScheme.surfaceContainerHighest,
+                  color: _hasActiveFilters && !isLargeScreen
+                      ? null
+                      : Theme.of(context).colorScheme.surfaceContainerHighest,
                   borderRadius: BorderRadius.circular(16),
                   boxShadow: _hasActiveFilters && !isLargeScreen
                       ? [
@@ -434,11 +442,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 const SizedBox(height: 16),
                 Text('Search failed', style: Theme.of(context).textTheme.headlineSmall),
                 const SizedBox(height: 8),
-                Text(
-                  jobProvider.error!,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                  textAlign: TextAlign.center,
-                ),
+                Text(jobProvider.error!, style: Theme.of(context).textTheme.bodyMedium, textAlign: TextAlign.center),
                 const SizedBox(height: 16),
                 FilledButton(onPressed: _performSearch, child: const Text('Retry')),
               ],
