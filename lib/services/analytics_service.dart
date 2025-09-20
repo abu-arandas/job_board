@@ -215,7 +215,8 @@ class AnalyticsService {
 
     // In a real app, you would send events to your analytics service
     // For now, we'll just store them locally
-    print('Analytics Event: ${event.name} - ${event.parameters}');
+    // TODO(Jules): Replace this with a proper logger.
+    // print('Analytics Event: ${event.name} - ${event.parameters}');
   }
 
   Future<void> _saveEventToStorage(AnalyticsEvent event) async {
