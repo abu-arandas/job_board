@@ -335,6 +335,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Premium Insights section
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
+                    // ignore: prefer_const_constructors
                     child: FadeInSlideUp(delay: const Duration(milliseconds: 400), child: _buildPremiumInsights(context)),
                   ),
 
@@ -376,7 +377,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Adjust number of columns as needed
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
@@ -387,6 +388,7 @@ class _HomeScreenState extends State<HomeScreen> {
           final job = jobProvider.featuredJobs[index];
           return FadeInSlideUp(
             delay: Duration(milliseconds: index * 100),
+            // ignore: prefer_const_constructors
             child: FeaturedJobCard(job: job),
           );
         },
@@ -407,6 +409,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: 300, // Keep original width for mobile
                 child: FadeInSlideUp(
                   delay: Duration(milliseconds: index * 100),
+                  // ignore: prefer_const_constructors
                   child: FeaturedJobCard(job: job),
                 ),
               ),
@@ -426,7 +429,7 @@ class _HomeScreenState extends State<HomeScreen> {
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
         padding: const EdgeInsets.all(20),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2, // Adjust number of columns
           crossAxisSpacing: 16,
           mainAxisSpacing: 16,
@@ -506,7 +509,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 isOutlined: true,
                               ),
                             ),
-                             SizedBox(width: 12),
+                             const SizedBox(width: 12),
                             Expanded(
                               child: PremiumButton(
                                 text: 'Interview Prep',

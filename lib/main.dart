@@ -25,7 +25,7 @@ import 'screens/resume_screen.dart';
 import 'screens/salary_insights_screen.dart';
 import 'screens/settings_screen.dart';
 import 'screens/skill_assessment_screen.dart';
-import 'theme/app_theme.dart';
+import 'core/theme/app_theme.dart';
 
 void main() {
   runApp(const JobBoardApp());
@@ -42,12 +42,17 @@ class JobBoardApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => NotificationProvider()),
         ChangeNotifierProvider(create: (_) => SettingsProvider()),
       ],
-      child: MaterialApp.router(
-        title: 'Job Board - Premium Template',
-        theme: AppTheme.lightTheme,
-        darkTheme: AppTheme.darkTheme,
-        debugShowCheckedModeBanner: false,
-        routerConfig: _router,
+      child: Consumer<SettingsProvider>(
+        builder: (context, settingsProvider, child) {
+          return MaterialApp.router(
+            title: 'Job Board - Premium Template',
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: settingsProvider.settings.themeMode,
+            debugShowCheckedModeBanner: false,
+            routerConfig: _router,
+          );
+        },
       ),
     );
 }
